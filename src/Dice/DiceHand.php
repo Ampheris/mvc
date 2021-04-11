@@ -36,4 +36,15 @@ class DiceHand
 
         return $result;
     }
+
+    function getGraphicDices(): array
+    {
+        $returnArr = [];
+
+        foreach ($this->listOfDices as $dice) {
+            array_push($returnArr, $dice->graphicDice());
+        }
+
+        return $returnArr;
+    }
 }

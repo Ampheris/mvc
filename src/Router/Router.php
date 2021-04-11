@@ -60,7 +60,7 @@ class Router
             return;
         } else if ($method === "POST" && $path === "/updateSession") {
             commandCheck($_POST['command']);
-            redirectTo(url("/diceGame"));
+            http_response_code(204);
             return;
         }
 

@@ -10,7 +10,8 @@ use Ampheris\Dice\DiceHand;
  * Functions.
  * @param string $command
  */
-function commandCheck(string $command) {
+function commandCheck(string $command)
+{
 
     /** @var DiceHand $user */
     $user = unserialize($_SESSION['game']['user']);
@@ -32,6 +33,8 @@ function commandCheck(string $command) {
             break;
         case 'restart':
             resetGame();
+            $user = new DiceHand();
+            $computer = new DiceHand();
             break;
     }
 
@@ -40,14 +43,13 @@ function commandCheck(string $command) {
 }
 
 /**
- * @param $number
+ * @param int $number
  * @param DiceHand $user
  */
-function updateUserDices($number, DiceHand $user)
+function updateUserDices(int $number, DiceHand $user)
 {
     $_SESSION['game']['isInitiated'] = true;
     $user->initDices(intval($number));
-
 }
 
 /**
@@ -55,15 +57,32 @@ function updateUserDices($number, DiceHand $user)
  */
 function throwYourDices(DiceHand $user)
 {
+    $_SESSION['game']['diceThrown'] = true;
     $user->rollAllDices();
     $_SESSION['game']['userScore'] += $user->getAllRolledValues();
 }
 
-function checkScore() {
+/**
+ * @param DiceHand $user
+ */
+
+function generateHTML(DiceHand $user): string
+{
+    $arrList = $user->getGraphicDices();
+    $result = '';
+
+    foreach ($arrList as $dice) {
+        $result .= '<i class="dice-sprite ' . $dice . '"></i>';
+    }
+    return $result;
+}
+
+function checkScore()
+{
     $userScore = $_SESSION['game']['userScore'];
     $computerScore = $_SESSION['game']['computerScore'];
 
-    if ($userScore == 21 or ($userScore < 21 and $computerScore > 21)){
+    if ($userScore == 21 or ($userScore < 21 and $computerScore > 21)) {
         $_SESSION['game']['winner'] = 'User';
     }
 
@@ -77,18 +96,21 @@ function checkScore() {
     }
 }
 
-function resetGame() {
+function resetGame()
+{
     $_SESSION['game']['gameRounds'] += 1;
     $_SESSION['game']['userScore'] = 0;
     $_SESSION['game']['computerScore'] = 0;
     $_SESSION['game']['isInitiated'] = false;
     $_SESSION['game']['winner'] = 'None';
+    $_SESSION['game']['diceThrown'] = false;
 }
 
 /**
  * @param DiceHand $computer
  */
-function computersTurn(DiceHand $computer) {
+function computersTurn(DiceHand $computer)
+{
 
     //Init computer with 1 dice
     $computer->initDices(1);
@@ -97,7 +119,7 @@ function computersTurn(DiceHand $computer) {
     while (true) {
         $computerScore = $_SESSION['game']['computerScore'];
 
-        if ( $computerScore < 21) {
+        if ($computerScore < 21) {
             $computer->rollAllDices();
             $_SESSION['game']['computerScore'] += $computer->getAllRolledValues();
         }
