@@ -28,6 +28,10 @@ function commandCheck(string $command) {
             break;
         case 'stop':
             computersTurn($computer);
+            checkScore();
+            break;
+        case 'restart':
+            resetGame();
             break;
     }
 
@@ -41,7 +45,9 @@ function commandCheck(string $command) {
  */
 function updateUserDices($number, DiceHand $user)
 {
-    
+    $_SESSION['game']['isInitiated'] = true;
+    $user->initDices(intval($number));
+
 }
 
 /**
@@ -50,19 +56,49 @@ function updateUserDices($number, DiceHand $user)
 function throwYourDices(DiceHand $user)
 {
     $user->rollAllDices();
+    $_SESSION['game']['userScore'] += $user->getAllRolledValues();
 }
 
-function computersTurn($computer) {
+function checkScore() {
+    $userScore = $_SESSION['game']['userScore'];
     $computerScore = $_SESSION['game']['computerScore'];
-    $stopComputer = $_SESSION['game']['stopComputer'];
-    $userWin = $_SESSION['game']['userWin'];
 
-    while (!$userWin and !$stopComputer) {
+    if ($userScore == 21 or ($userScore < 21 and $computerScore > 21)){
+        $_SESSION['game']['winner'] = 'User';
+    }
+
+    // If computer has score 21 it wins, even if user got 21 in score.
+    if ($computerScore == 21) {
+        $_SESSION['game']['winner'] = 'Computer';
+    }
+}
+
+function resetGame() {
+    $_SESSION['game']['gameRounds'] += 1;
+    $_SESSION['game']['userScore'] = 0;
+    $_SESSION['game']['computerScore'] = 0;
+    $_SESSION['game']['isInitiated'] = false;
+}
+
+/**
+ * @param DiceHand $computer
+ */
+function computersTurn(DiceHand $computer) {
+
+    //Init computer with 1 dice
+    $computer->initDices(1);
+
+    // Run while computer is not stopped.
+    while (true) {
+        $computerScore = $_SESSION['game']['computerScore'];
+
         if ( $computerScore < 21) {
             $computer->rollAllDices();
-            $computerScore += $computer->getAllRolledValues();
-        } elseif ($computerScore > 21) {
-            $stopComputer = true;
+            $_SESSION['game']['computerScore'] += $computer->getAllRolledValues();
+        }
+
+        if ($computerScore > 21 or $computerScore == 21) {
+            break;
         }
     }
 }

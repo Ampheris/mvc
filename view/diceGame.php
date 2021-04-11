@@ -13,15 +13,17 @@ function debug_to_console($data)
 }
 
 // Session values
+$userInit = new DiceHand();
+$computer = new DiceHand();
+
 $_SESSION['game'] = $_SESSION['game'] ?? [
         'isInitiated' => false,
-        'user' => serialize(new DiceHand()),
-        'userDices' => 0,
+        'user' => serialize($userInit),
         'userScore' => 0,
-        'userWin' => false,
-        'computer' => serialize(new DiceHand()),
+        'winner' => 'None',
+        'computer' => serialize($computer),
         'computerScore' => 0,
-        'stopComputer' => false,
+        'gameRounds' => 0
     ];
 ?>
 
@@ -37,7 +39,7 @@ $_SESSION['game'] = $_SESSION['game'] ?? [
 <h2>Throw your dice/dices!</h2>
 <p>Your current score: <?= $_SESSION['game']['userScore'] ?></p>
 <button id="throw-dices">Throw dice/dices</button>
-<button id="stop">Stop/button>
+<button id="stop">Stop</button>
 
 
 <script type="text/javascript">
@@ -58,21 +60,12 @@ $_SESSION['game'] = $_SESSION['game'] ?? [
             data: {'command': 'throw'}
         });
     });
+
+    $('#stop').click(() => {
+        $.ajax({
+            type: 'POST',
+            url: '<?= url("/updateSession") ?>',
+            data: {'command': 'stop'}
+        });
+    });
 </script>
-<?php
-//Init computers dices
-/*$computer->initDices(1);
-
-
-// Computer throws dices until computer reaches 21 or more.
-    while (!$stopComputer and !$userWin) {
-        if ($computerScore < 21 ){
-            $computer->rollAllDices();
-            $computerScore +=$computer->getAllRolledValues();
-        } elseif ($computerScore > 21 ) {
-            $stopComputer = true;
-        }
-    }*/
-?>
-
-<p>Result shows here!</p>

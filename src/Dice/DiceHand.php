@@ -7,7 +7,7 @@ class DiceHand
 {
     public array $listOfDices;
 
-    function __constructor($listOfDices)
+    function __construct()
     {
         $this->listOfDices = [];
     }
