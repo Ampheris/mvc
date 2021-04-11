@@ -71,6 +71,10 @@ function checkScore() {
     if ($computerScore == 21) {
         $_SESSION['game']['winner'] = 'Computer';
     }
+
+    if ($computerScore > 21 and $userScore > 21) {
+        $_SESSION['game']['winner'] = 'NoWinner';
+    }
 }
 
 function resetGame() {
@@ -78,6 +82,7 @@ function resetGame() {
     $_SESSION['game']['userScore'] = 0;
     $_SESSION['game']['computerScore'] = 0;
     $_SESSION['game']['isInitiated'] = false;
+    $_SESSION['game']['winner'] = 'None';
 }
 
 /**

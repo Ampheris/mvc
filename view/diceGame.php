@@ -36,10 +36,26 @@ $_SESSION['game'] = $_SESSION['game'] ?? [
     <button class="num-dices" value="2">Two dices</button>
 <?php } ?>
 
-<h2>Throw your dice/dices!</h2>
-<p>Your current score: <?= $_SESSION['game']['userScore'] ?></p>
-<button id="throw-dices">Throw dice/dices</button>
-<button id="stop">Stop</button>
+<?php if ($_SESSION['game']['winner'] == 'None') { ?>
+    <h2>Throw your dice/dices!</h2>
+    <p>Your current score: <?= $_SESSION['game']['userScore'] ?></p>
+    <button id="throw-dices">Throw dice/dices</button>
+    <button id="stop">Stop</button>
+<?php } ?>
+
+<?php if ($_SESSION['game']['winner'] != 'None') { ?>
+    <h2>Game completed!</h2>
+    <p>Your score: <?= $_SESSION['game']['userScore'] ?></p>
+    <p>Computers score: <?= $_SESSION['game']['computerScore'] ?></p>
+    <?php if ($_SESSION['game']['winner'] != 'User') {?>
+        <p>Congratulations, you have won the round!</p>
+    <?php } elseif ($_SESSION['game']['winner'] != 'Computer') {?>
+        <p>Sorry, the computer have won the round!</p>
+    <?php } elseif ($_SESSION['game']['winner'] != 'NoWinner') {?>
+        <p>Sorry, no one has won the round!</p>
+    <?php } ?>
+    <button id="restart">Restart</button>
+<?php } ?>
 
 
 <script type="text/javascript">
@@ -66,6 +82,14 @@ $_SESSION['game'] = $_SESSION['game'] ?? [
             type: 'POST',
             url: '<?= url("/updateSession") ?>',
             data: {'command': 'stop'}
+        });
+    });
+
+    $('#restart').click(() => {
+        $.ajax({
+            type: 'POST',
+            url: '<?= url("/updateSession") ?>',
+            data: {'command': 'restart'}
         });
     });
 </script>
