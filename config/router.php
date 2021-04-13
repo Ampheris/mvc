@@ -34,3 +34,15 @@ $router->addGroup("/form", function (RouteCollector $router) {
     $router->addRoute("GET", "/view", ["\Mos\Controller\Form", "view"]);
     $router->addRoute("POST", "/process", ["\Mos\Controller\Form", "process"]);
 });
+
+$router->addGroup("/diceGame" , function (RouteCollector $router)
+{
+    $router->addRoute("GET", "", ["\Ampheris\ampController\DiceGame", "index"]);
+    $router->addRoute("POST", "/updateSession", ["\Ampheris\ampController\DiceGame", "updateSession"]);
+});
+
+$router->addGroup("/yatzy" , function (RouteCollector $router)
+{
+    $router->addRoute("GET", "", ["\Ampheris\ampController\Yatzy", "index"]);
+    $router->addRoute("POST", "/updateSession", ["\Ampheris\ampController\Yatzy", "updateSession"]);
+});

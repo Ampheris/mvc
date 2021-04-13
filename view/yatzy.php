@@ -17,7 +17,7 @@ function debug_to_console($data)
 $userInit = new DiceHand();
 $computer = new DiceHand();
 
-$_SESSION['game'] = $_SESSION['game'] ?? [
+$_SESSION['yatzy'] = $_SESSION['yatzy'] ?? [
         'isInitiated' => false,
         'user' => serialize($userInit),
         'userScore' => 0,
@@ -35,7 +35,7 @@ $user = unserialize($_SESSION['game']['user']);
 
 ?>
 
-<h1>Dice 21 Game, round <?= $_SESSION['game']['gameRounds']; ?></h1>
+<h1>Yatzy Game, round <?= $_SESSION['game']['gameRounds']; ?></h1>
 <?php if ($_SESSION['game']['isInitiated'] == false) { ?>
     <h2>Choose 1 or 2 dices</h2>
     <button class="num-dices" value="1">One dice</button>
