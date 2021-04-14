@@ -6,7 +6,8 @@
         },
         "files": [
             "src/functions.php",
-            "src/diceFunctions.php"
+            "src/diceFunctions.php",
+            "src/yatzyFunctions.php"
         ]
     },
     "require-dev": {

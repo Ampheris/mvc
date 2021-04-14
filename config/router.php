@@ -44,5 +44,5 @@ $router->addGroup("/diceGame" , function (RouteCollector $router)
 $router->addGroup("/yatzy" , function (RouteCollector $router)
 {
     $router->addRoute("GET", "", ["\Ampheris\ampController\Yatzy", "index"]);
-    $router->addRoute("POST", "/updateSession", ["\Ampheris\ampController\Yatzy", "updateSession"]);
+    $router->addRoute("POST", "/updateYatzy", ["\Ampheris\ampController\Yatzy", "updateYatzy"]);
 });

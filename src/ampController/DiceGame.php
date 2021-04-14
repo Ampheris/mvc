@@ -7,15 +7,8 @@ namespace Ampheris\ampController;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
-
-use function Mos\Functions\{
-    renderView,
-    url
-};
-
-use function Ampheris\Functions\{
-    commandCheck
-};
+use function Ampheris\Functions\{commandCheck};
+use function Mos\Functions\{renderView, url};
 
 /**
  * Controller for the dice game routes.

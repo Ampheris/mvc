@@ -10,6 +10,7 @@ class DiceHand
     function __construct()
     {
         $this->listOfDices = [];
+
     }
 
     function initDices($numOfDices)
@@ -46,5 +47,15 @@ class DiceHand
         }
 
         return $returnArr;
+    }
+
+    function getAllLatestValues(): array {
+        $arrayList = [];
+
+        foreach ($this->listOfDices as $dice) {
+            array_push($arrayList, $dice->lastestThrow());
+        }
+
+        return $arrayList;
     }
 }
