@@ -14,8 +14,6 @@ use function Mos\Functions\{
 };
 
 use function Ampheris\Functions\{
-    updateUserDices,
-    throwYourDices,
     commandCheck
 };
 

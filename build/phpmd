@@ -1,5 +1,1 @@
-/mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/Router/Router.php:27	The method dispatch() has a Cyclomatic Complexity of 15. The configured cyclomatic complexity threshold is 10.
-/mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/functions.php:67	Missing class import via use statement (line '67', column '23').
-/mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/functions.php:73	Missing class import via use statement (line '73', column '21').
-/mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/Dice/Dice.php	-	Unexpected token: int, line: 9, col: 12, file: /mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/Dice/Dice.php.
-/mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/Dice/DiceHand.php	-	Unexpected token: array, line: 8, col: 12, file: /mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/Dice/DiceHand.php.
+/mnt/c/Users/mathi/Documents/dbwebb/kurser/mvc/me/game/src/Router/Router.php:25	The method dispatch() has a Cyclomatic Complexity of 15. The configured cyclomatic complexity threshold is 10.

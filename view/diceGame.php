@@ -76,7 +76,7 @@ $user = unserialize($_SESSION['game']['user']);
 
         $.ajax({
             type: 'POST',
-            url: '<?= url("/updateSession") ?>',
+            url: '<?= url("/diceGame/updateSession") ?>',
             data: {'command': 'setDices', 'number': parseInt(num)},
             success: function (){
                 location.reload();
@@ -87,7 +87,7 @@ $user = unserialize($_SESSION['game']['user']);
     $('#throw-dices').click(() => {
         $.ajax({
             type: 'POST',
-            url: '<?= url("/updateSession") ?>',
+            url: '<?= url("/diceGame/updateSession") ?>',
             data: {'command': 'throw'},
             success: function (){
                 location.reload();
@@ -98,7 +98,7 @@ $user = unserialize($_SESSION['game']['user']);
     $('#stop').click(() => {
         $.ajax({
             type: 'POST',
-            url: '<?= url("/updateSession") ?>',
+            url: '<?= url("/diceGame/updateSession") ?>',
             data: {'command': 'stop'},
             success: function (){
                 location.reload();
@@ -109,7 +109,7 @@ $user = unserialize($_SESSION['game']['user']);
     $('#restart').click(() => {
         $.ajax({
             type: 'POST',
-            url: '<?= url("/updateSession") ?>',
+            url: '<?= url("/diceGame/updateSession") ?>',
             data: {'command': 'restart'},
             success: function (){
                 location.reload();

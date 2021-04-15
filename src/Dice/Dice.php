@@ -6,8 +6,8 @@ namespace Ampheris\Dice;
 
 class Dice
 {
-    public int $diceSides;
-    public int $lastestThrowValue;
+    public $diceSides;
+    public $lastestThrowValue;
 
     function __construct()
     {
