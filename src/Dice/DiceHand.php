@@ -10,7 +10,6 @@ class DiceHand
     function __construct()
     {
         $this->listOfDices = [];
-
     }
 
     function initDices($numOfDices)
@@ -44,6 +43,20 @@ class DiceHand
 
         foreach ($this->listOfDices as $dice) {
             array_push($returnArr, $dice->graphicDice());
+        }
+
+        return $returnArr;
+    }
+
+    function getSavedGraphicDices($x, $arr): array
+    {
+        $returnArr = [];
+
+        foreach ($arr as $dice) {
+            if ($dice->lastestThrow() == $x)
+            {
+                array_push($returnArr, $dice->graphicDice());
+            }
         }
 
         return $returnArr;
