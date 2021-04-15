@@ -14,11 +14,12 @@ use Ampheris\Dice\DiceHand;
  * Functions.
  * @param string $command
  */
-function yatzyCommandCheck(string $command) {
+function yatzyCommandCheck(string $command)
+{
     /** @var DiceHand $player */
     $player = unserialize($_SESSION['yatzy']['user']);
 
-    switch ($command){
+    switch ($command) {
         case 'throw':
             yatzyThrowDices($player);
             break;
@@ -39,7 +40,8 @@ function yatzyCommandCheck(string $command) {
 /**
  * @param DiceHand $player
  */
-function yatzyThrowDices(DiceHand $player) {
+function yatzyThrowDices(DiceHand $player)
+{
     $player->rollAllDices();
     $_SESSION['yatzy']['dicesThrown'] = true;
     $_SESSION['yatzy']['diceValues'] = $player->getAllLatestValues();
@@ -47,8 +49,7 @@ function yatzyThrowDices(DiceHand $player) {
     $_SESSION['yatzy']['turns'] -= 1;
 
     foreach ($player->listOfDices as $key => $dice) {
-        if ($dice->lastestThrow() == $_SESSION['yatzy']['level'])
-        {
+        if ($dice->lastestThrow() == $_SESSION['yatzy']['level']) {
             array_push($_SESSION['yatzy']['storedValues'], $dice);
             unset($player->listOfDices[$key]);
         }
@@ -81,8 +82,7 @@ function saveAndReroll(DiceHand $player)
     $_SESSION['yatzy']['turns'] -= 1;
 
     foreach ($player->listOfDices as $key => $dice) {
-        if ($dice->lastestThrow() == $_SESSION['yatzy']['level'])
-        {
+        if ($dice->lastestThrow() == $_SESSION['yatzy']['level']) {
             array_push($_SESSION['yatzy']['storedValues'], $dice);
             unset($player->listOfDices[$key]);
         }
@@ -99,7 +99,7 @@ function printSavedDices(DiceHand $player): string
 {
     $storedValues = $_SESSION['yatzy']['storedValues'];
 
-    $arrList = $player->getSavedGraphicDices($_SESSION['yatzy']['level'], $storedValues );
+    $arrList = $player->getSavedGraphicDices($_SESSION['yatzy']['level'], $storedValues);
     $result = '';
 
     foreach ($arrList as $dice) {
@@ -111,7 +111,8 @@ function printSavedDices(DiceHand $player): string
 /**
  * @param DiceHand $player
  */
-function nextTurn(DiceHand $player) {
+function nextTurn(DiceHand $player)
+{
     $level = $_SESSION['yatzy']['level'];
     $amountOfDices = count($_SESSION['yatzy']['storedValues']);
 
