@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ampheris\YatzyFunctions;
 
 use Ampheris\Dice\DiceHand;
+use function Ampheris\Functions\throwYourDices;
 
 /**
  * Functions.
@@ -27,10 +28,13 @@ function yatzyCommandCheck(string $command)
             saveAndReroll($player);
             break;
         case 'nextTurn':
-            nextTurn($player);
+            nextTurn();
             $player = new DiceHand();
             $player->initDices(5);
             $player->rollAllDices();
+            break;
+        case 'restart':
+            restart($player);
             break;
     }
 
@@ -108,10 +112,8 @@ function printSavedDices(DiceHand $player): string
     return $result;
 }
 
-/**
- * @param DiceHand $player
- */
-function nextTurn(DiceHand $player)
+
+function nextTurn()
 {
     $level = $_SESSION['yatzy']['level'];
     $amountOfDices = count($_SESSION['yatzy']['storedValues']);
@@ -122,5 +124,21 @@ function nextTurn(DiceHand $player)
 
     $_SESSION['yatzy']['diceValues'] = [];
     $_SESSION['yatzy']['storedValues'] = [];
+}
 
+/**
+ * @param DiceHand $player
+ */
+function restart(DiceHand $player){
+    $_SESSION['yatzy']['turns'] = 3;
+    $_SESSION['yatzy']['level'] = 1;
+    $_SESSION['yatzy']['userScore'] = 0;
+
+    $_SESSION['yatzy']['diceValues'] = [];
+    $_SESSION['yatzy']['storedValues'] = [];
+
+    $player = new DiceHand();
+    $player->initDices(5);
+
+    yatzyThrowDices($player);
 }

@@ -61,6 +61,8 @@ $user = unserialize($_SESSION['yatzy']['user']);
 <?php } else { ?>
     <h2>Game completed</h2>
     <p>Your score: <?= $_SESSION['yatzy']['userScore'] ?> </p>
+    <p>Want to restart?</p>
+    <button id="restart">Restart</button>
 <?php } ?>
 
 <script type="text/javascript">
@@ -98,6 +100,20 @@ $user = unserialize($_SESSION['yatzy']['user']);
             type: 'POST',
             url: '<?= url("/yatzy/updateYatzy") ?>',
             data: {'command': 'nextTurn'},
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                console.log("Error!");
+            }
+        });
+    });
+
+    $('#restart').click(() => {
+        $.ajax({
+            type: 'POST',
+            url: '<?= url("/yatzy/updateYatzy") ?>',
+            data: {'command': 'restart'},
             success: function () {
                 location.reload();
             },

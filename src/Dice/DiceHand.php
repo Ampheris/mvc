@@ -5,7 +5,7 @@ namespace Ampheris\Dice;
 
 class DiceHand
 {
-    public array $listOfDices;
+    public $listOfDices;
 
     function __construct()
     {
@@ -48,12 +48,12 @@ class DiceHand
         return $returnArr;
     }
 
-    function getSavedGraphicDices($x, $arr): array
+    function getSavedGraphicDices($num, $arr): array
     {
         $returnArr = [];
 
         foreach ($arr as $dice) {
-            if ($dice->lastestThrow() == $x)
+            if ($dice->lastestThrow() == $num)
             {
                 array_push($returnArr, $dice->graphicDice());
             }
