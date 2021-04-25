@@ -24,9 +24,4 @@ class Dice
     {
         return $this->lastestThrowValue;
     }
-
-    public function changeDiceSides(int $newSides)
-    {
-        $this->diceSides = $newSides;
-    }
 }
