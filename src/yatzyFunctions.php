@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ampheris\YatzyFunctions;
 
 use Ampheris\Dice\DiceHand;
+use function Ampheris\Functions\resetGame;
 use function Ampheris\Functions\throwYourDices;
 
 /**
@@ -58,8 +59,6 @@ function yatzyThrowDices(DiceHand $player)
             unset($player->listOfDices[$key]);
         }
     }
-
-
 }
 
 /**
@@ -109,6 +108,11 @@ function printSavedDices(DiceHand $player): string
     foreach ($arrList as $dice) {
         $result .= '<i class="dice-sprite ' . $dice . '"></i>';
     }
+
+    if ($result == ''){
+        $result = '<p>No saved dices</p>';
+    }
+
     return $result;
 }
 
